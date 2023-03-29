@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SingleMovie from "../SingleMovie/SingleMovie";
 import "./Movies.css";
-const Movies = () => {
+const Movies = ({ handleWatchTime }) => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     fetch("data.json")
@@ -12,7 +12,10 @@ const Movies = () => {
   return (
     <div>
       {movies.map((movie) => (
-        <SingleMovie movie={movie}></SingleMovie>
+        <SingleMovie
+          movie={movie}
+          handleWatchTime={handleWatchTime}
+        ></SingleMovie>
       ))}
     </div>
   );

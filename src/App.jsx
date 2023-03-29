@@ -7,16 +7,28 @@ import Movies from "./components/Movies/Movies";
 import SideCart from "./components/SideCart/SideCart";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [watchTime, setWatchTime] = useState("");
+
+  const handleWatchTime = (time) => {
+    const previousWatchTime = localStorage.getItem("watchTime");
+    if (previousWatchTime) {
+      const sum = parseInt(previousWatchTime) + time;
+      localStorage.setItem("watchTime", sum);
+      setWatchTime(sum);
+    } else {
+      localStorage.setItem("watchTime", time);
+      setWatchTime(time);
+    }
+  };
 
   return (
     <div className="App">
       <div className="main row">
         <div className="movies-container col-md-8">
-          <Movies></Movies>
+          <Movies handleWatchTime={handleWatchTime}></Movies>
         </div>
         <div className="side-cart-container col-md-4">
-          <SideCart></SideCart>
+          <SideCart watchTime={watchTime}></SideCart>
         </div>
       </div>
     </div>

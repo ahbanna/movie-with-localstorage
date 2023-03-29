@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const SideCart = () => {
+const SideCart = ({ watchTime }) => {
+  const [time, setTime] = useState(watchTime);
+  useEffect(() => {
+    const watchTimeFromStorage = localStorage.getItem("watchTime");
+    setTime(watchTimeFromStorage);
+  }, [watchTime]);
   return (
     <div>
-      <h2>This is from side cart</h2>
+      <h2>Total watch time</h2>
+      <input type="text" value={time} />
     </div>
   );
 };
